@@ -41,10 +41,10 @@ ktlint {
     outputToConsole.set(true)
     ignoreFailures.set(false)
     enableExperimentalRules.set(true)
-}
-
-tasks.withType<org.jlleitschuh.gradle.ktlint.tasks.KtLintCheckTask>().configureEach {
-    reporterOutputDir.set(project.layout.buildDirectory.dir("reports/ktlint"))
+    reporters {
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
+        reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.CHECKSTYLE)
+    }
 }
 
 sonarqube {
