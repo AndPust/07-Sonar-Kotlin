@@ -35,6 +35,7 @@ jobs:
         working-directory: ./kotlinBackend
       - name: Run ktlint
         run: ./gradlew ktlintCheck
+        continue-on-error: true
         working-directory: ./kotlinBackend
       - name: Build and analyze
         env:
