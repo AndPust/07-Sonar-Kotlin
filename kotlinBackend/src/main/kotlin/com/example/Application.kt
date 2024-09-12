@@ -1,22 +1,23 @@
 package com.example
-
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import com.example.plugins.*
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import com.example.models.*
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
+import com.example.models.itemList
+import io.ktor.http.ContentType
+import io.ktor.http.HttpMethod
+import io.ktor.server.application.call
+import io.ktor.server.application.install
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
+import io.ktor.server.plugins.cors.CORS
+import io.ktor.server.request.receive
+import io.ktor.server.response.respondText
+import io.ktor.server.routing.get
+import io.ktor.server.routing.post
+import io.ktor.server.routing.routing
 import kotlinx.serialization.encodeToString
-import io.ktor.server.plugins.cors.*
+import kotlinx.serialization.json.Json
 
 fun main() {
     embeddedServer(Netty, port = 9000, host = "0.0.0.0") {
-        install(CORS){
+        install(CORS) {
             allowMethod(HttpMethod.Options)
             allowMethod(HttpMethod.Get)
             allowMethod(HttpMethod.Post)
@@ -27,14 +28,14 @@ fun main() {
             exposeHeader("key")
         }
         routing {
-            get("/api"){
+            get("/api") {
                 call.respondText(Json.encodeToString(itemList), ContentType.Text.Plain)
             }
-            post("/api/cart"){
+            post("/api/cart") {
                 val post = call.receive<String>()
                 call.respondText("Received $post from the cart request.", ContentType.Text.Plain)
             }
-            post("/api/payment"){
+            post("/api/payment") {
                 val post = call.receive<String>()
                 call.application.environment.log.info("Incoming payment request: $post")
                 call.respondText("Received $post from the payment request.", ContentType.Text.Plain)
@@ -43,4 +44,3 @@ fun main() {
 //        configureRouting()
     }.start(wait = true)
 }
-
