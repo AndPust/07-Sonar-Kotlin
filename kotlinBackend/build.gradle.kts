@@ -47,13 +47,12 @@ ktlint {
     }
 }
 
-sonarqube {
+sonar {
     properties {
         property("sonar.projectKey", "AndPust_07-Sonar-Kotlin")
         property("sonar.organization", "andpust")
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.kotlin.ktlint.reportPaths", "build/reports/ktlint/ktlintMainSourceSetCheck/ktlintMainSourceSetCheck.xml")
-        property("sonar.kotlin.ktlint.reportPaths", "build/reports/ktlint/ktlintMainSourceSetCheck/ktlintMainSourceSetCheck.txt")
         property("sonar.kotlin.file.suffixes", ".kt,.kts")
         property("sonar.sources", "src/main/kotlin")
     }
