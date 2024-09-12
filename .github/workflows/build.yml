@@ -30,6 +30,8 @@ jobs:
           path: ~/.gradle/caches
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
+      - name: Change wrapper permissions
+        run: chmod +x ./kotlinBackend/gradlew
       - name: Run ktlint
         run: ./kotlinBackend/gradlew ktlintCheck
       - name: Build and analyze
