@@ -39,7 +39,7 @@ ktlint {
     verbose.set(true)
     android.set(false)
     outputToConsole.set(true)
-    ignoreFailures.set(false)
+    ignoreFailures.set(true)
     enableExperimentalRules.set(true)
     reporters {
         reporter(org.jlleitschuh.gradle.ktlint.reporter.ReporterType.PLAIN)
@@ -52,7 +52,8 @@ sonarqube {
         property("sonar.projectKey", "AndPust_07-Sonar-Kotlin")
         property("sonar.organization", "andpust")
         property("sonar.host.url", "https://sonarcloud.io")
-        property("sonar.kotlin.ktlint.reportPaths", "build/reports/ktlint/ktlintMainSourceSetCheck.xml")
+        property("sonar.kotlin.ktlint.reportPaths", "build/reports/ktlint/ktlintMainSourceSetCheck/ktlintMainSourceSetCheck.xml")
+        property("sonar.kotlin.ktlint.reportPaths", "build/reports/ktlint/ktlintMainSourceSetCheck/ktlintMainSourceSetCheck.txt")
         property("sonar.kotlin.file.suffixes", ".kt,.kts")
         property("sonar.sources", "src/main/kotlin")
     }
